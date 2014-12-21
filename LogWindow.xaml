@@ -1,0 +1,27 @@
+﻿<Window x:Class="wmonitor.LogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="LogWindow" Height="234" Width="385">
+    <DockPanel>
+    <Menu DockPanel.Dock="Top">
+        <MenuItem Header="过滤器">
+            <MenuItem x:Name="mnuInfo" Header="普通" Click="mnuFilter_Click" IsCheckable="True" IsChecked="True"/>
+            <MenuItem x:Name="mnuWarn" Header="警告" Click="mnuFilter_Click" IsCheckable="True" IsChecked="True"/>
+            <MenuItem x:Name="mnuError" Header="错误" Click="mnuFilter_Click" IsCheckable="True" IsChecked="True"/>
+            <MenuItem x:Name="mnuRefresh" Header="刷新" Click="mnuRefresh_Click" IsCheckable="False" IsChecked="False"/>
+        </MenuItem>
+
+    </Menu>
+    <Grid>
+        <DataGrid Grid.Row="0" x:Name="dgLog" HorizontalAlignment="Stretch" VerticalAlignment="Top" CanUserAddRows="False" ItemsSource="{Binding LogDatabase}"  AutoGenerateColumns="False"  HorizontalContentAlignment="Stretch" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="时间" Binding="{Binding Path=Date,StringFormat='{}{0:yyyy年MM月dd日 dddd HH:mm:ss}',ConverterCulture=zh-CN}" IsReadOnly="True" Width="0.2*"/>
+                <DataGridTextColumn Header="级别" Binding="{Binding Path=Level}" IsReadOnly="True" Width="0.05*"/>
+                <DataGridTextColumn Header="内容" Binding="{Binding Path=Message}" IsReadOnly="True" Width="0.45*"/>
+                <DataGridTextColumn Header="内容" Binding="{Binding Path=Location}" IsReadOnly="True" Width="0.3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    </DockPanel>
+</Window>

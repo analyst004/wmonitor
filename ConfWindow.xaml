@@ -1,0 +1,12 @@
+﻿<Window x:Class="wmonitor.ConfWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="配置" Height="500" Width="800">
+    <DockPanel>
+        <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                 TextWrapping="Wrap" FontSize="16" IsReadOnly="True" 
+                 Text="{Binding Path=Configuration}"/>
+
+    </DockPanel>
+</Window>

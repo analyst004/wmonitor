@@ -1,0 +1,56 @@
+﻿<Window x:Class="wmonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Commands="clr-namespace:wmonitor"
+        Title="WMonitor" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Closing="MainWindow_Closing">
+    <DockPanel>
+        <Grid>
+            <DataGrid Grid.Row="0" x:Name="dgAll" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="18" CanUserAddRows="False" ItemsSource="{Binding UrlDatabase}"  AutoGenerateColumns="False"  HorizontalContentAlignment="Stretch">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_DoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="0.05*"/>
+                    <DataGridTextColumn Header="网站" Binding="{Binding Path=Domain}" IsReadOnly="True" Width="0.1*"/>
+                    <DataGridTextColumn Header="名称" Binding="{Binding Path=Name}" IsReadOnly="True" Width="0.3*"/>
+                    <DataGridTextColumn Header="存档数量" Binding="{Binding Path=Count}" IsReadOnly="True" Width="0.05*"/>
+                    <DataGridTextColumn Header="成功" Binding="{Binding Path=SucceedCount}" IsReadOnly="True" Width="0.05*"/>
+                    <DataGridTextColumn Header="失败" Binding="{Binding Path=FailedCount}" IsReadOnly="True" Width="0.05*"/>
+                    <DataGridTextColumn Header="最后启动时间" Binding="{Binding Path=LastRunTime,StringFormat='{}{0:yyyy年MM月dd日 dddd HH:mm:ss}',ConverterCulture=zh-CN}" IsReadOnly="True" Width="0.2*"/>
+                    <DataGridTextColumn Header="状态" Binding="{Binding Path=Status}" IsReadOnly="True" Width="0.1*"/>
+                    <DataGridTemplateColumn Header="" Width="25">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="Commands:MonitorCommands.ViewConfig" CommandParameter="{Binding Path=Configuration}" Height="25">
+                                    <Image Source="Resources/14.png"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="" Width="25">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="Commands:MonitorCommands.ViewLog" CommandParameter="{Binding Path=Id}" Height="25">
+                                    <Image Source="Resources/2.png" Stretch="Uniform"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StatusBar Name="sbar" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Bottom">
+                <StatusBarItem>
+
+                    <TextBlock Text="{Binding Status}"></TextBlock>
+
+                </StatusBarItem>
+            </StatusBar>
+
+        </Grid>
+    </DockPanel>
+</Window>
